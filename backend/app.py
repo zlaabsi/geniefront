@@ -73,7 +73,7 @@ def text_less_image(img_path):
 
     result_img = inpaint_text(img_path, pipeline)
 
-    Image.fromarray(result_img).save("backend/background.jpg")
+    Image.fromarray(result_img).save("backend/background_images/background.jpg")
     return (result_img)
 
 def text_recognition(img_url):
