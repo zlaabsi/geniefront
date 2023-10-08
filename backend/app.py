@@ -17,6 +17,11 @@ from langchain.prompts import PromptTemplate, ChatPromptTemplate, HumanMessagePr
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 
+import keras_ocr # started by installing keras_ocr on the local environment.
+import cv2
+import math
+import numpy as np
+
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -31,6 +36,44 @@ endpoint = os.environ["VISION_ENDPOINT"]
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
+def midpoint(x1, y1, x2, y2):
+    x_mid = int((x1 + x2)/2)
+    y_mid = int((y1 + y2)/2)
+    return (x_mid, y_mid)
+
+# pipeline = keras_ocr.pipeline.Pipeline()
+
+def inpaint_text(img_path, pipeline):
+    # read image
+    img = keras_ocr.tools.read(img_path)
+    # generate (word, box) tuples 
+    prediction_groups = pipeline.recognize([img])
+    mask = np.zeros(img.shape[:2], dtype="uint8")
+    for box in prediction_groups[0]:
+        x0, y0 = box[1][0]
+        x1, y1 = box[1][1] 
+        x2, y2 = box[1][2]
+        x3, y3 = box[1][3] 
+        
+        x_mid0, y_mid0 = midpoint(x1, y1, x2, y2)
+        x_mid1, y_mi1 = midpoint(x0, y0, x3, y3)
+        
+        thickness = int(math.sqrt( (x2 - x1)**2 + (y2 - y1)**2 ))
+        
+        cv2.line(mask, (x_mid0, y_mid0), (x_mid1, y_mi1), 255,    
+        thickness)
+        img = cv2.inpaint(img, mask, 7, cv2.INPAINT_NS)
+                 
+    return(img)
+
+def text_less_image(img_path):
+
+    pipeline = keras_ocr.pipeline.Pipeline()
+
+    result_img = inpaint_text(img_path, pipeline)
+
+    Image.fromarray(result_img).save("backend/background_images/background.jpg")
+    return (result_img)
 
 def text_recognition(img_url):
 
@@ -98,15 +141,44 @@ def html_css_gen(layout):
     output = chain.run(layout=layout)
     print(output)
 
-    return output        
+    return output
+
+# html_css_gen that implements the background in HTML code
+def html_css_gen(layout, background_image):
+   prompt = PromptTemplate(
+            template="""
+        This is a representation of a website design, which may come from a hand-drawn sketch or a design created using software like Figma or Adobe XD. 
+        The design includes text elements, images, graphical elements, and their coordinates along with the coordinates of their four outer vertices.
+        Construct a modern, sans-serif website using the HTML and Tailwind CSS framework that mirrors these design elements.
+        For images and graphical elements, use appropriate HTML tags like <img> and <svg>, and ensure they are placed and sized according to the coordinates provided in the layout.
+        Determine the appropriate HTML and Tailwind CSS classes to reflect their relative positions. 
+        Utilize layout tags to represent their font size and relative placement based on the provided coordinates. 
+        If elements appear to be part of a menu, employ <ul> and <li> tags. Intelligently use tags such as <button> and <input> based on the element names.
+        Prioritize the design according to the given coordinates but also employ some creative freedom in the layout and CSS based on standard web design principles. 
+        Refrain from using absolute coordinates in your HTML source code. 
+        The output should be a combined HTML and Tailwind CSS source code without any descriptive commentary. 
+        Generate only source code file, no description: {layout}.
+        You receive a background image that you will integrate to the HTML and CSS code using the CSS \'background-image\' property. The background image is part of the layout as the background of the website : {background_image}.
+        """
+            ,
+       input_variables=["layout", "background_image"]
+   )
+   llm = ChatOpenAI(model="gpt-4-0613",temperature=0)
+   chain = LLMChain(prompt=prompt, llm=llm)
+   output = chain.run(layout=layout, background_image = background_image)
+   print(output)
+
+   return output        
        
 
 
 def image_run():
     html_code = ""
     layout = text_recognition(st.session_state.img)
+    text_less_image(st.session_state.img)
+    background_image = "backend/background_images/background.jpg"
     if layout != []:
-        html_code = html_css_gen(layout)
+        html_code = html_css_gen(layout, background_image)
 
     st.session_state.html = html_code
     st.session_state.image = st.session_state.img
@@ -129,7 +201,3 @@ with col2:
         st.code(st.session_state.html)
     with st.container():
         components.html(st.session_state.html, height=600, scrolling=True)
-
-
-
-
