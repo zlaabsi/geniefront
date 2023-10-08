@@ -25,9 +25,9 @@ import numpy as np
 import streamlit as st
 import streamlit.components.v1 as components
 
-os.environ["OPENAI_API_KEY"] = "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"
-os.environ["VISION_KEY"] = "2b8e20e1b03a4b90ab22b7f6cc5a82b3"
-endpoint = os.environ["VISION_ENDPOINT"] = "https://jincraft-vision.cognitiveservices.azure.com/"
+os.environ["OPENAI_API_KEY"] = ""
+os.environ["VISION_KEY"] = ""
+endpoint = os.environ["VISION_ENDPOINT"] = ""
 st.set_page_config(layout="wide") 
 
 subscription_key = os.environ["VISION_KEY"]
@@ -73,7 +73,7 @@ def text_less_image(img_path):
 
     result_img = inpaint_text(img_path, pipeline)
 
-    Image.fromarray(result_img).save("backend/background_images/background.jpg")
+    Image.fromarray(result_img).save("backend/background.jpg")
     return (result_img)
 
 def text_recognition(img_url):
