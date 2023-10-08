@@ -25,13 +25,14 @@ import numpy as np
 import streamlit as st
 import streamlit.components.v1 as components
 
-os.environ["OPENAI_API_KEY"] = ""
-os.environ["VISION_KEY"] = ""
-endpoint = os.environ["VISION_ENDPOINT"] = ""
+os.environ["OPENAI_API_KEY"] = "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"
+os.environ["VISION_KEY"] = "2b8e20e1b03a4b90ab22b7f6cc5a82b3"
+endpoint = os.environ["VISION_ENDPOINT"] = "https://jincraft-vision.cognitiveservices.azure.com/"
 st.set_page_config(layout="wide") 
 
 subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
+
 
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
