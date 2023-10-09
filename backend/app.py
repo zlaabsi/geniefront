@@ -28,10 +28,14 @@ import streamlit.components.v1 as components
 os.environ["OPENAI_API_KEY"] = ""
 os.environ["VISION_KEY"] = ""
 endpoint = os.environ["VISION_ENDPOINT"] = ""
+
 st.set_page_config(layout="wide") 
 
 subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BACKGROUND_PATH = os.path.join(BASE_DIR, "static/background.jpg")
 
 
 
@@ -73,7 +77,8 @@ def text_less_image(img_path):
 
     result_img = inpaint_text(img_path, pipeline)
 
-    Image.fromarray(result_img).save("backend/background_images/background.jpg")
+    #Image.fromarray(result_img).save("backend/background_images/background.jpg")
+    Image.fromarray(result_img).save(BACKGROUND_PATH)
     return (result_img)
 
 def text_recognition(img_url):
@@ -120,29 +125,6 @@ def html_gen(layout):
 
     return output
 
-def html_css_gen(layout):
-    prompt = PromptTemplate(
-        template = """
-        This is a representation of a website design, which may come from a hand-drawn sketch or a design created using software like Figma or Adobe XD. 
-        The design includes text elements, images, graphical elements, and their coordinates along with the coordinates of their four outer vertices.
-        Construct a modern, sans-serif website using the HTMLand Tailwind CSS that mirrors these design elements.
-        For images and graphical elements, use appropriate HTML tags like <img> and <svg>, and ensure they are placed and sized according to the coordinates provided in the layout.
-        Determine the appropriate HTML and Tailwind CSS classes to reflect their relative positions. 
-        Utilize layout tags to represent their font size and relative placement based on the provided coordinates. 
-        If elements appear to be part of a menu, employ <ul> and <li> tags. Intelligently use tags such as <button> and <input> based on the element names.
-        Prioritize the design according to the given coordinates but also employ some creative freedom in the layout and CSS based on standard web design principles. 
-        Refrain from using absolute coordinates in your HTML source code. 
-        The output should be a combined HTML and Tailwind CSS source code without any descriptive commentary.
-        Don't include ```html at the beginning of the code source and ``` at the end of the source code.
-        Generate only source code file, no description: {layout}.""",
-        input_variables=["layout"]
-    )
-    llm = ChatOpenAI(model="gpt-4-0613",temperature=0)
-    chain = LLMChain(prompt=prompt, llm=llm)
-    output = chain.run(layout=layout)
-    print(output)
-
-    return output
 
 # html_css_gen that implements the background in HTML code
 def html_css_gen(layout, background_image):
@@ -177,7 +159,7 @@ def image_run():
     html_code = ""
     layout = text_recognition(st.session_state.img)
     text_less_image(st.session_state.img)
-    background_image = "backend/background_images/background.jpg"
+    background_image = BACKGROUND_PATH
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
@@ -190,7 +172,7 @@ if "image" not in st.session_state:
     st.session_state.image = ''    
 
 
-st.title("Jincraft - Generative Vision")
+st.title("GenieFront - Generative Vision for Front-End Development")
 col1, col2 = st.columns([0.5, 0.5], gap='medium')
 with col1:
     st.text_input("Image URL:", value="", key='img')
