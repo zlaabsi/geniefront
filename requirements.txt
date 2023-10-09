@@ -1,4 +1,3 @@
-git+https://github.com/faustomorales/keras-ocr.git#egg=keras-ocr
 azure-cognitiveservices-vision-computervision
 langchain
 openai
