@@ -35,7 +35,7 @@ subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BACKGROUND_PATH = os.path.join(BASE_DIR, "./static/background.jpg")
+BACKGROUND_PATH = os.path.join(BASE_DIR, "static/background.jpg")
 
 
 
@@ -103,27 +103,6 @@ def text_recognition(img_url):
     print(layout)
     print("End of Computer Vision.")
     return layout
-
-def html_gen(layout):
-    prompt = PromptTemplate(
-        template="""This is a layout of a handwriting website design, including text and their coordinates of four outer vertices. 
-        Make an HTML modern sans-serif website that reflects these elements and decide which 
-        CSS can be used to match their relative positions, try to use proper layout tags to match
-         their font size and relative placement based on their coordinates. 
-         Use <ul> and <li> if the elements look like as menu list. 
-         Smartly use function tags like <button> <input> if their names look like that.
-         Your design should be prior to the coordinates, 
-         then you should also use some imagination for the layout and CSS from common web design principle.
-         Remember, don't use absolute coordinates in your HTML source code. 
-         Generate only source code file, no description: {layout}.\n""",
-        input_variables=["layout"]
-    )
-    llm = ChatOpenAI(model="gpt-4-0613",temperature=0)
-    chain = LLMChain(prompt=prompt, llm=llm)
-    output = chain.run(layout=layout)
-    print(output)
-
-    return output
 
 
 # html_css_gen that implements the background in HTML code
