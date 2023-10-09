@@ -34,8 +34,8 @@ st.set_page_config(layout="wide")
 subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BACKGROUND_PATH = os.path.join(BASE_DIR, "static/background.jpg")
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# BACKGROUND_PATH = os.path.join(BASE_DIR, "static/background.jpg")
 
 
 
@@ -78,9 +78,15 @@ def text_less_image(img_path):
 
     result_img = inpaint_text(img_path, pipeline)
 
+    img_name = img_path.split("/")[-1].split(".")[0]
+
+    img_name = "".join([c for c in img_name if c.isalpha() or c.isdigit() or c==' ']).rstrip()
+
+    img_name = img_name + ".jpg"
     #Image.fromarray(result_img).save("backend/background_images/background.jpg")
-    Image.fromarray(result_img).save(BACKGROUND_PATH)
-    return (result_img)
+    Image.fromarray(result_img).save(f"static/{img_name}")
+    
+    return img_name
 
 def text_recognition(img_url):
 
@@ -138,8 +144,10 @@ def html_css_gen(layout, background_image):
 def image_run():
     html_code = ""
     layout = text_recognition(st.session_state.img)
-    text_less_image(st.session_state.img)
-    background_image = BACKGROUND_PATH
+    background_img_name = text_less_image(st.session_state.img)
+    background_image = f"http://localhost:8501/static/{background_img_name}"
+    
+    # background_image = f"https://geniefront.streamlit.app/static/{background_img_name}"
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
