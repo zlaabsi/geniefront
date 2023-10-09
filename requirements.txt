@@ -1,5 +1,5 @@
-azure-cognitiveservices-vision-computervision==0.9.0
 keras-ocr
+azure-cognitiveservices-vision-computervision==0.9.0
 langchain==0.0.310
 openai==0.28.1
 opencv-python==4.8.1.78
