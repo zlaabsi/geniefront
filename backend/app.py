@@ -25,9 +25,9 @@ import numpy as np
 import streamlit as st
 import streamlit.components.v1 as components
 
-os.environ["OPENAI_API_KEY"] = ""
-os.environ["VISION_KEY"] = ""
-endpoint = os.environ["VISION_ENDPOINT"] = ""
+os.environ["OPENAI_API_KEY"] 
+os.environ["VISION_KEY"] 
+endpoint = os.environ["VISION_ENDPOINT"]
 
 st.set_page_config(layout="wide") 
 
