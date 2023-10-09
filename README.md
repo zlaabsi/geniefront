@@ -1,3 +1,4 @@
 # GenieFront
 
-![Jincraft Boreal](https://github.com/zlaabsi/jincraft/assets/52045850/b765dc70-de05-476f-8899-457f897fe800)
+
+![GenieFront Presentation Hackathon](https://github.com/zlaabsi/geniefront/assets/52045850/f812c181-beaa-4bfc-ab18-e4b0417d9282)
