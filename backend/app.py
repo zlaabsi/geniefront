@@ -34,8 +34,8 @@ st.set_page_config(layout="wide")
 subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
 
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# BACKGROUND_PATH = os.path.join(BASE_DIR, "static/background.jpg")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BACKGROUND_PATH = os.path.join(BASE_DIR, "static/")
 
 
 
@@ -84,7 +84,7 @@ def text_less_image(img_path):
 
     img_name = img_name + ".jpg"
     #Image.fromarray(result_img).save("backend/background_images/background.jpg")
-    Image.fromarray(result_img).save(f"static/{img_name}")
+    Image.fromarray(result_img).save(BACKGROUND_PATH + img_name)
     
     return img_name
 
