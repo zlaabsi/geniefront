@@ -25,9 +25,9 @@ import numpy as np
 import streamlit as st
 import streamlit.components.v1 as components
 
-os.environ["OPENAI_API_KEY"] = ""
-os.environ["VISION_KEY"] = ""
-endpoint = os.environ["VISION_ENDPOINT"] = ""
+os.environ["OPENAI_API_KEY"] = "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"
+os.environ["VISION_KEY"] = "2b8e20e1b03a4b90ab22b7f6cc5a82b3"
+endpoint = os.environ["VISION_ENDPOINT"] = "https://jincraft-vision.cognitiveservices.azure.com/"
 
 st.set_page_config(layout="wide") 
 
