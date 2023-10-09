@@ -1,3 +1,4 @@
+azure
 azure-cognitiveservices-vision-computervision
 langchain
 openai
