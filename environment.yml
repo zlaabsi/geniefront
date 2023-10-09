@@ -5,4 +5,11 @@ dependencies:
   - python==3.8.18
   - pip:
       - git+https://github.com/faustomorales/keras-ocr.git#egg=keras-ocr
+      - azure-cognitiveservices-vision-computervision
+      - langchain
+      - openai
+      - opencv-python
+      - pillow
+      - streamlit
+      - tensorflow
 prefix: /opt/conda/envs/geniefront
