@@ -145,9 +145,9 @@ def image_run():
     html_code = ""
     layout = text_recognition(st.session_state.img)
     background_img_name = text_less_image(st.session_state.img)
-    background_image = f"http://localhost:8501/static/{background_img_name}"
+    # background_image = f"http://localhost:8501/static/{background_img_name}"
     
-    # background_image = f"https://geniefront.streamlit.app/static/{background_img_name}"
+    background_image = f"https://geniefront.streamlit.app/static/{background_img_name}"
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
