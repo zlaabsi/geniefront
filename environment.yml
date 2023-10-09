@@ -2,7 +2,7 @@ name: geniefront
 channels:
   - defaults
 dependencies:
-  - python==3.8
+  - python==3.8.18
   - pip:
       - git+https://github.com/faustomorales/keras-ocr.git#egg=keras-ocr
       - absl-py==2.0.0
