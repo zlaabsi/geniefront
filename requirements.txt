@@ -1,7 +1,8 @@
-azure-cognitiveservices-vision-computervision==0.9.0
-langchain==0.0.310
-openai==0.28.1
-opencv-python==4.8.1.78
-pillow==10.0.1
-streamlit==1.27.2
-tensorflow==2.13.1
+git+https://github.com/faustomorales/keras-ocr.git#egg=keras-ocr
+azure-cognitiveservices-vision-computervision
+langchain
+openai
+opencv-python
+pillow
+streamlit
+tensorflow
