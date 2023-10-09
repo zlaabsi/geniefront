@@ -72,7 +72,7 @@ dependencies:
       - jsonschema-specifications==2023.7.1
       - keras==2.13.1
       - keras-applications==1.0.8
-      - keras-ocr==0.0.0
+      - git+https://github.com/faustomorales/keras-ocr.git#egg=keras-ocr
       - kiwisolver==1.4.5
       - langchain==0.0.310
       - langsmith==0.0.43
