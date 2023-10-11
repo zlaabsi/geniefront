@@ -98,6 +98,7 @@ def text_less_image(img_path):
 def text_recognition(img_url):
 
     print("===== Read File - remote =====")
+    print(BASE_DIR)
     print(BACKGROUND_PATH)
     read_response = computervision_client.read(img_url,  raw=True)
     read_operation_location = read_response.headers["Operation-Location"]
