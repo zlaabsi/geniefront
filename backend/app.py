@@ -88,7 +88,7 @@ def text_less_image(img_path):
     # Image.fromarray(result_img).save(BACKGROUND_PATH + img_name)
     image = Image.fromarray(result_img)
 
-    with os.open(BACKGROUND_PATH + img_name, 'wb') as f:
+    with open(BACKGROUND_PATH + img_name, 'wb') as f:
         f.write(image.getbuffer())
     
     return img_name
