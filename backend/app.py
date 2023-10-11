@@ -85,9 +85,10 @@ def text_less_image(img_path):
 
     img_name = img_name + ".jpg"
     #Image.fromarray(result_img).save("backend/background_images/background.jpg")
+
+    Image.fromarray(result_img).save(os.path.join(BACKGROUND_PATH, img_name))
     
-    print("Saving image to:", BACKGROUND_PATH + img_name)
-    Image.fromarray(result_img).save(BACKGROUND_PATH + img_name)
+    #Image.fromarray(result_img).save(BACKGROUND_PATH + img_name)
     image = Image.fromarray(result_img)
 
     with open(BACKGROUND_PATH + img_name, 'wb') as f:
