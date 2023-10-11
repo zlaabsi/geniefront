@@ -106,9 +106,6 @@ def text_less_image(img_path):
     img_name = "".join([c for c in img_name if c.isalpha() or c.isdigit() or c==' ']).rstrip()
     img_name = img_name + ".jpg"
 
-    if not os.path.exists(BACKGROUND_PATH):
-        os.makedirs(BACKGROUND_PATH)
-
     # Sauvegardez l'image
     Image.fromarray(result_img).save(os.path.join(BACKGROUND_PATH, img_name))
 
