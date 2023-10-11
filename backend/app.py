@@ -174,7 +174,8 @@ def image_run():
     # background_image = f"http://localhost:8501/static/{background_img_name}"
     
     #background_image = f"https://geniefront.streamlit.app/backend/static/{background_img_name}"
-    background_image = f"app/static/{background_img_name}"
+    #background_image = f"app/static/{background_img_name}"
+    background_image = f"data:image/jpg;base64,{base64.b64encode(open(image_path, "rb").read()).decode()}"
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
