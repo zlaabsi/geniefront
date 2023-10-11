@@ -168,9 +168,7 @@ if "image" not in st.session_state:
 # Front
 st.title("GenieFront - Generative Vision for Front-End Development")
 
-with st.sidebar:
-    "[View the source code](https://github.com/zlaabsi/geniefront/main/backend/app.py)"
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/zlaabsi/geniefront?quickstart=1)"
+
 
 user_guide = """
 **User Guide:**
@@ -194,7 +192,10 @@ user_guide = """
    - If the resultant code doesn't align with your expectations, you can adjust your design and try again. Remember, clearer designs yield better results!
 """
 
-st.markdown(user_guide)
+with st.sidebar:
+    "[View the source code](https://github.com/zlaabsi/geniefront/main/backend/app.py)"
+    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/zlaabsi/geniefront?quickstart=1)"
+    st.markdown(user_guide)
 
 
 col1, col2 = st.columns([0.5, 0.5], gap='medium')
