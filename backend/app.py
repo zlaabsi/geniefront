@@ -165,7 +165,38 @@ if "image" not in st.session_state:
     st.session_state.image = ''    
 
 
+# Front
 st.title("GenieFront - Generative Vision for Front-End Development")
+
+with st.sidebar:
+    "[View the source code](https://github.com/zlaabsi/geniefront/edit/main/backend/app.py)"
+    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/zlaabsi/geniefront?quickstart=1)"
+
+user_guide = """
+**User Guide:**
+
+---
+
+**Step-by-Step Instructions for Using GenieFront on Streamlit:**
+
+1. **Upload Your Design**:
+   - Navigate to the "Image URL" input box.
+   - Enter the URL of your design image. Ensure the image is publicly accessible.
+   
+2. **Process the Design**:
+   - Click the "Run" button. GenieFront will analyze your design, extract design elements, and generate the corresponding HTML and CSS code.
+   
+3. **View the Results**:
+   - On the right panel, you'll see the generated source code within the "See source code" expander. You can copy this code for your use.
+   - Below the source code section, you'll find a real-time preview of how the design translates to a live website.
+
+4. **Feedback & Iteration**:
+   - If the resultant code doesn't align with your expectations, you can adjust your design and try again. Remember, clearer designs yield better results!
+"""
+
+st.markdown(user_guide)
+
+
 col1, col2 = st.columns([0.5, 0.5], gap='medium')
 with col1:
     st.text_input("Image URL:", value="", key='img')
