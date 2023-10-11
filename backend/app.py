@@ -108,8 +108,8 @@ def text_less_image(img_path):
     img_name = img_name + ".jpg"
 
     # Sauvegardez l'image
-    Image.fromarray(result_img).save(os.path.join(BACKGROUND_PATH, img_name))
-    Image.fromarray(result_img).save(f"./static/{img_name}")
+    #Image.fromarray(result_img).save(os.path.join(BACKGROUND_PATH, img_name))
+    Image.fromarray(result_img).save(f"static/{img_name}")
 
     return img_name
 
