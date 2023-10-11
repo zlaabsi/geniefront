@@ -152,7 +152,8 @@ def image_run():
     background_img_name = text_less_image(st.session_state.img)
     # background_image = f"http://localhost:8501/static/{background_img_name}"
     
-    background_image = f"https://geniefront.streamlit.app/backend/static/{background_img_name}"
+    #background_image = f"https://geniefront.streamlit.app/backend/static/{background_img_name}"
+    background_image = f"https://github.com/zlaabsi/geniefront/blob/main/backend/static/{background_img_name}?raw=true"
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
