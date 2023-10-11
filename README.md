@@ -20,6 +20,11 @@ GenieFront stands at the crossroads of design and development, offering a state-
 - **Python Libraries**: Essential libraries such as `os`, `sys`, `PIL`, `numpy`, and `cv2` are utilized to facilitate image processing and other functionalities.
 
 ---
+## GenieFront Workflow Diagram
+![GenieFront Workflow Diagram](https://github.com/zlaabsi/geniefront/assets/52045850/f23f04d7-b326-421c-adcf-55c9addc0faa)
+
+
+---
 
 ## Key Functionalities
 
