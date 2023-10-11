@@ -35,6 +35,98 @@ GenieFront stands at the crossroads of design and development, offering a state-
 
 ---
 
+## In-Depth Function Breakdown with Code Examples
+
+### Azure Computer Vision Integration
+
+The `ComputerVisionClient` from Azure's SDK is employed to tap into their OCR capabilities. Here's a code snippet showcasing its usage:
+
+```python
+from azure.cognitiveservices.vision.computervision import ComputerVisionClient
+from msrest.authentication import CognitiveServicesCredentials
+
+subscription_key = os.environ["VISION_KEY"]
+endpoint = os.environ["VISION_ENDPOINT"]
+
+computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
+```
+
+### Keras-OCR for Image Processing
+
+The `inpaint_text` function uses `keras_ocr` for text detection and removal:
+
+```python
+import keras_ocr
+
+def inpaint_text(img_path, pipeline):
+    img = keras_ocr.tools.read(img_path)
+    prediction_groups = pipeline.recognize([img])
+    mask = np.zeros(img.shape[:2], dtype="uint8")
+    for box in prediction_groups[0]:
+        # ... code to process the bounding box and create a mask ...
+    img = cv2.inpaint(img, mask, 7, cv2.INPAINT_NS)
+    return img
+```
+
+### GPT-4 for Code Generation
+
+The cleaned design is fed to GPT-4 for code generation. While the actual communication with GPT-4 might be abstracted behind APIs, the idea is to send the recognized layout to the model and retrieve the generated code.
+
+
+### Streamlit for User Interaction
+
+Streamlit offers a simple way to create web interfaces. Here's a basic example from the script:
+
+```python
+import streamlit as st
+
+st.title("GenieFront - Generative Vision for Front-End Development")
+user_input = st.text_input("Image URL:", value="", key='img')
+```
+
+### Supporting Functions
+
+1. **midpoint**: Assists in finding the midpoint between two coordinates.
+
+```python
+def midpoint(x1, y1, x2, y2):
+    x_mid = int((x1 + x2)/2)
+    y_mid = int((y1 + y2)/2)
+    return (x_mid, y_mid)
+```
+
+2. **text_recognition**: Uses Azure's Computer Vision to recognize and extract text from the design.
+
+```python
+def text_recognition(img_url):
+    read_response = computervision_client.read(img_url,  raw=True)
+    # ... processing to get the text ...
+    return layout
+```
+
+3. **text_less_image**: Processes the design to isolate the design elements.
+
+```python
+def text_less_image(img_path):
+    pipeline = keras_ocr.pipeline.Pipeline()
+    result_img = inpaint_text(img_path, pipeline)
+    # ... further processing ...
+    return img_name
+```
+
+4. **html_css_gen**: Generates the final HTML and CSS code, integrating the background image.
+
+```python
+def html_css_gen(layout, background_image):
+    prompt = PromptTemplate( ... )  # Template for GPT-4
+    output = chain.run(layout=layout, background_image=background_image)
+    return output
+```
+
+These functions form the backbone of the GenieFront solution, ensuring a smooth transition from design to code.
+
+---
+
 ## Running GenieFront
 
 To run GenieFront locally:
