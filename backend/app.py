@@ -36,6 +36,7 @@ endpoint = os.environ["VISION_ENDPOINT"]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+#Don't change the background path
 BACKGROUND_PATH = os.path.join(BASE_DIR, "static/")
 
 
@@ -173,7 +174,7 @@ def image_run():
     # background_image = f"http://localhost:8501/static/{background_img_name}"
     
     #background_image = f"https://geniefront.streamlit.app/backend/static/{background_img_name}"
-    background_image = f"https://github.com/zlaabsi/geniefront/blob/main/backend/static/{background_img_name}?raw=true"
+    background_image = f"app/static/{background_img_name}"
     if layout != []:
         html_code = html_css_gen(layout, background_image)
 
