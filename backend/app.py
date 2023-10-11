@@ -169,7 +169,7 @@ if "image" not in st.session_state:
 st.title("GenieFront - Generative Vision for Front-End Development")
 
 with st.sidebar:
-    "[View the source code](https://github.com/zlaabsi/geniefront/edit/main/backend/app.py)"
+    "[View the source code](https://github.com/zlaabsi/geniefront/main/backend/app.py)"
     "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/zlaabsi/geniefront?quickstart=1)"
 
 user_guide = """
