@@ -189,7 +189,7 @@ if "image" not in st.session_state:
 
 
 # Front
-st.title("GenieFront - Generative Vision for Front-End Development")
+st.title("GenieFront - Generative Vision for Front-End Development 🧞")
 
 
 
