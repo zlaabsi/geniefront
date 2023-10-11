@@ -14,9 +14,7 @@ GenieFront stands at the crossroads of design and development, offering a state-
 ## Demo 
 
 
-
 https://github.com/zlaabsi/geniefront/assets/52045850/4489cf22-3ab2-4573-96bc-f4b91da61a49
-
 
 
 ---
