@@ -34,8 +34,9 @@ st.set_page_config(layout="wide")
 subscription_key = os.environ["VISION_KEY"]
 endpoint = os.environ["VISION_ENDPOINT"]
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BACKGROUND_PATH = os.path.join(BASE_DIR, "static/")
+#BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BACKGROUND_PATH = os.path.join(BASE_DIR, "./static/")
 
 
 
