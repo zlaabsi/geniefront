@@ -73,7 +73,7 @@ def inpaint_text(img_path, pipeline):
                  
     return(img)
 
-def text_less_image(img_path):
+def text_less_image_freeze(img_path):
 
     pipeline = keras_ocr.pipeline.Pipeline()
 
@@ -94,6 +94,24 @@ def text_less_image(img_path):
     with open(BACKGROUND_PATH + img_name, 'wb') as f:
         f.write(image.getbuffer())
     
+    return img_name
+
+def text_less_image(img_path):
+
+    pipeline = keras_ocr.pipeline.Pipeline()
+
+    result_img = inpaint_text(img_path, pipeline)
+
+    img_name = img_path.split("/")[-1].split(".")[0]
+    img_name = "".join([c for c in img_name if c.isalpha() or c.isdigit() or c==' ']).rstrip()
+    img_name = img_name + ".jpg"
+
+    if not os.path.exists(BACKGROUND_PATH):
+        os.makedirs(BACKGROUND_PATH)
+
+    # Sauvegardez l'image
+    Image.fromarray(result_img).save(os.path.join(BACKGROUND_PATH, img_name))
+
     return img_name
 
 def text_recognition(img_url):
